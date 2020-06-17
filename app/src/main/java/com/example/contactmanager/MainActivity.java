@@ -26,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
 
         //db.addContact(edwin);
 
+        Contact c = db.getContact(1);
+        c.setName("newEdwin");
+        c.setPhoneNumber("0707278158");
+
+        int updatedRow = db.updateContact(c);
+        Log.d("RowId", "onCreate: " +updatedRow);
+
         List<Contact> contactList = db.getAllContacts();
 
         for (Contact contact: contactList) {
