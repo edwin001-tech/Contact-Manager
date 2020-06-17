@@ -24,19 +24,22 @@ public class MainActivity extends AppCompatActivity {
         edwin.setName("Edwin");
         edwin.setPhoneNumber("0745481307");
 
-        //db.addContact(edwin);
+        db.addContact(edwin);
 
-        Contact c = db.getContact(1);
-        c.setName("newEdwin");
-        c.setPhoneNumber("0707278158");
+       // Contact c = db.getContact(1);
+       // c.setName("newEdwin");
+       // c.setPhoneNumber("0707278158");
 
-        int updatedRow = db.updateContact(c);
-        Log.d("RowId", "onCreate: " +updatedRow);
+        //int updatedRow = db.updateContact(c);
+        //Log.d("RowId", "onCreate: " +updatedRow);
+
+        //update a contact
+       // db.deleteContact(c);
 
         List<Contact> contactList = db.getAllContacts();
 
         for (Contact contact: contactList) {
-            Log.d("MainActivity", "Oncreate: " +contact.getName());
+            Log.d("MainActivity", "Oncreate: " +contact.getId());
         }
     }
 }
