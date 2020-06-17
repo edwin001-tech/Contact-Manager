@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseHandler db = new DatabaseHandler(MainActivity.this);
 
+        Log.d("Count", "onCreate: " +db.getCount());
+
         //create contact object
         Contact edwin = new Contact();
         edwin.setName("Edwin");
