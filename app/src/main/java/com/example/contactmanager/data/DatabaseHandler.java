@@ -5,12 +5,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.example.contactmanager.R;
 import com.example.contactmanager.model.Contact;
 import com.example.contactmanager.util.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -53,6 +57,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         //insert to row
         db.insert(Util.TABLE_NAME, null, values);
+        Log.d("DbHandler", "addContact: " + "item added");
         db.close(); //close dn connection
     }
 
@@ -74,6 +79,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return contact;
     }
+
+    //get all contacts
+    public List<Contact> getAllContacts () {
+        List<Contact> contactList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //select all contacts from our database
+        String selectAll = "SELECT * FROM " + Util.TABLE_NAME;
+        Cursor cursor = db.rawQuery(selectAll, null);
+
+        //Loop through our data
+        if (cursor.moveToFirst()){
+            Contact contact = new Contact();
+            contact.setId(Integer.parseInt(cursor.getString(0)));
+            contact.setName(cursor.getString(1));
+            contact.setPhoneNumber(cursor.getString(2));
+
+            //add contact objects to our list
+            contactList.add(contact);
+        }while (cursor.moveToNext());
+
+        return contactList;
+
+    }
+
 
 
 }
